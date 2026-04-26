@@ -6,7 +6,7 @@ st.set_page_config(page_title="Aria AI Chatbot", page_icon="✦", layout="center
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap');
-html, body, [class*="css"] { font-family: 'Sora', sans-serif; background-color: #0c0b14; color: #f1f0ff; }
+html, body, [class*="css"] { font-family: 'Sora', sans-serif; background-color: #0c0b14; color: #000000; }
 .stApp {
     background: radial-gradient(ellipse at 20% 20%, rgba(124,111,255,0.12), transparent 60%),
                 radial-gradient(ellipse at 80% 80%, rgba(192,132,252,0.08), transparent 60%), #0c0b14;
