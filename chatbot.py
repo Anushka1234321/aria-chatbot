@@ -1,7 +1,7 @@
 import streamlit as st
 from groq import Groq
 
-st.set_page_config(page_title="Aria AI Chatbot", page_icon="✦", layout="centered")
+st.set_page_config(page_title="Aria AI Chatbot", page_icon="✦", layout="centered", initial_sidebar_state="expanded")
 
 st.markdown("""
 <style>
