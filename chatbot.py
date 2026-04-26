@@ -21,7 +21,7 @@ st.markdown("# ✦ Aria — AI Chatbot")
 st.markdown("<p style='color: rgba(241,240,255,0.5); margin-top: -12px; font-size: 14px;'>Built with Python & Streamlit</p>", unsafe_allow_html=True)
 st.divider()
 
-api_key = st.sidebar.text_input("🔑 Enter your Groq API Key", type="password")
+api_key ="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"
 st.sidebar.markdown("[Get a free API key →](https://console.groq.com)", unsafe_allow_html=True)
 st.sidebar.divider()
 st.sidebar.markdown("About this project")
