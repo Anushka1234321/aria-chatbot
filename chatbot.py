@@ -12,7 +12,7 @@ html, body, [class*="css"] { font-family: 'Sora', sans-serif; background-color: 
                 radial-gradient(ellipse at 80% 80%, rgba(192,132,252,0.08), transparent 60%), #0c0b14;
 }
 .stChatMessage { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(124,111,255,0.15) !important; border-radius: 16px !important; padding: 12px !important; }
-textarea { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(124,111,255,0.3) !important; border-radius: 12px !important; color: #f1f0ff !important; font-family: 'Sora', sans-serif !important; }
+textarea, input, [data-testid="stChatInput"] textarea { background: rgba(255,255,255,0.05) !important; border: 1px solid rgba(124,111,255,0.3) !important; border-radius: 12px !important; color: #f1f0ff !important; font-family: 'Sora', sans-serif !important; }
 h1 { background: linear-gradient(135deg, #7c6fff, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; font-size: 2rem !important; }
 </style>
 """, unsafe_allow_html=True)
