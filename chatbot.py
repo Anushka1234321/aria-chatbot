@@ -58,8 +58,8 @@ if prompt := st.chat_input("Ask Aria anything..."):
                     )
                     reply = response.choices[0].message.content
                     st.markdown(reply)
-                    if st.button("🔊 Read aloud"):
-                       st.components.v1.html(f"<script>speechSynthesis.speak(new SpeechSynthesisUtterance('{reply}'))</script>")
+                    st.components.v1.html(f"""<button onclick="speechSynthesis.speak(new SpeechSynthesisUtterance('{reply}'))">🔊 Read aloud</button""", height=50)
+
                     st.session_state.messages.append({"role": "assistant", "content": reply})
                 except Exception as e:
                     st.error(f"Error: {str(e)}")
