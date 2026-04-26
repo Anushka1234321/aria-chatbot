@@ -1,5 +1,5 @@
 import streamlit as st
-import google.generativeai as genai
+from groq import Groq
 
 st.set_page_config(page_title="Aria AI Chatbot", page_icon="✦", layout="centered")
 
@@ -21,11 +21,11 @@ st.markdown("# ✦ Aria — AI Chatbot")
 st.markdown("<p style='color: rgba(241,240,255,0.5); margin-top: -12px; font-size: 14px;'>Built with Python & Streamlit</p>", unsafe_allow_html=True)
 st.divider()
 
-api_key = st.sidebar.text_input("🔑 Enter your Google API Key", type="password")
-st.sidebar.markdown("[Get a free API key →](https://aistudio.google.com)", unsafe_allow_html=True)
+api_key = st.sidebar.text_input("🔑 Enter your Groq API Key", type="password")
+st.sidebar.markdown("[Get a free API key →](https://console.groq.com)", unsafe_allow_html=True)
 st.sidebar.divider()
 st.sidebar.markdown("About this project")
-st.sidebar.markdown("An AI chatbot built with Python, Streamlit, and Google Gemini AI.")
+st.sidebar.markdown("An AI chatbot built with Python, Streamlit, and Groq AI.")
 
 if "messages" not in st.session_state:
     st.session_state.messages = [
@@ -38,7 +38,7 @@ for msg in st.session_state.messages:
 
 if prompt := st.chat_input("Ask Aria anything..."):
     if not api_key:
-        st.error("⚠️ Please enter your Google API key in the sidebar to continue.")
+        st.error("⚠️ Please enter your Groq API key in the sidebar to continue.")
     else:
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
@@ -47,18 +47,16 @@ if prompt := st.chat_input("Ask Aria anything..."):
         with st.chat_message("assistant"):
             with st.spinner("Aria is thinking..."):
                 try:
-                    genai.configure(api_key=api_key)
-                    model = genai.GenerativeModel(
-                        model_name="gemini-2.0-flash",
-                        system_instruction="You are Aria, a helpful and friendly AI assistant. Be concise, warm, and genuinely useful."
+                    client = Groq(api_key=api_key)
+                    history = [{"role": "system", "content": "You are Aria, a helpful and friendly AI assistant. Be concise, warm, and genuinely useful."}]
+                    for m in st.session_state.messages:
+                        history.append({"role": m["role"], "content": m["content"]})
+                    response = client.chat.completions.create(
+                        model="llama3-8b-8192",
+                        messages=history,
+                        max_tokens=1000
                     )
-                    history = []
-                    for m in st.session_state.messages[1:-1]:
-                        role = "user" if m["role"] == "user" else "model"
-                        history.append({"role": role, "parts": [m["content"]]})
-                    chat = model.start_chat(history=history)
-                    response = chat.send_message(prompt)
-                    reply = response.text
+                    reply = response.choices[0].message.content
                     st.markdown(reply)
                     st.session_state.messages.append({"role": "assistant", "content": reply})
                 except Exception as e:
